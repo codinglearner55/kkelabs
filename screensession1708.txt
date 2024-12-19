@@ -449,9 +449,9 @@ userarr=(tony steve banner)
 hostarr=(stapp01 stapp02 stapp03)
 #passarr=()
 
-for i in ${!userarr[*]}
+for i in ${!userarr[*]} ## eg. 0 1 2
   do
-    echo "starting ${userarr[i]}@${hostarr[i]}"
+    echo "starting ${userarr[i]}@${hostarr[i]}"   ### parameter expansion section  - https://linux.die.net/man/1/bash
     ssh ${userarr[i]}@${hostarr[i]} sudo yum -y install iptables
   done
 thor@jumphost ~/kke$ bash  install_iptables.bash
