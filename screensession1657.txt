@@ -1,0 +1,1220 @@
+thor@jumphost ~/kke$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        new file:   setup_sshauth.bash
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        deleted:    setup_sshauth.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        tmuxsessiondetails.txt
+
+thor@jumphost ~/kke$ git commit -m "ssh auth update"
+[main 03bbc76] ssh auth update
+ Committer: codinglearner55 <thor@jumphost.stratos.xfusioncorp.com>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 9 insertions(+)
+ create mode 100644 setup_sshauth.bash
+thor@jumphost ~/kke$ git status
+On branch main
+Your branch is ahead of 'origin/main' by 1 commit.
+  (use "git push" to publish your local commits)
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        deleted:    setup_sshauth.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        tmuxsessiondetails.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+thor@jumphost ~/kke$ ls -ltr
+total 52
+-rw-r--r-- 1 thor thor   143 Dec 19 16:21 setup_tmux.bash
+-rw-r--r-- 1 thor thor   100 Dec 19 16:21 README.md
+-rw-r--r-- 1 thor thor 35149 Dec 19 16:21 LICENSE
+-rw-r--r-- 1 thor thor    48 Dec 19 16:24 tmuxsessiondetails.txt
+-rw-r--r-- 1 thor thor   225 Dec 19 16:28 setup_sshauth.bash
+thor@jumphost ~/kke$ ssh tony@stapp02
+tony@stapp02's password:
+Permission denied, please try again.
+tony@stapp02's password:
+Permission denied, please try again.
+tony@stapp02's password:
+
+thor@jumphost ~/kke$ ssh tony@stapp01
+[tony@stapp01 ~]$ sudo sed -i 's/ansible/tony/g' /etc/sudoers
+
+We trust you have received the usual lecture from the local System
+Administrator. It usually boils down to these three things:
+
+    #1) Respect the privacy of others.
+    #2) Think before you type.
+    #3) With great power comes great responsibility.
+
+[sudo] password for tony:
+[tony@stapp01 ~]$
+[tony@stapp01 ~]$
+logout
+Connection to stapp01 closed.
+thor@jumphost ~/kke$ ssh steve@stapp02
+[steve@stapp02 ~]$ sudo sed -i 's/ansible/steve/g' /etc/sudoers
+
+We trust you have received the usual lecture from the local System
+Administrator. It usually boils down to these three things:
+
+    #1) Respect the privacy of others.
+    #2) Think before you type.
+    #3) With great power comes great responsibility.
+
+[sudo] password for steve:
+[steve@stapp02 ~]$
+[steve@stapp02 ~]$
+[steve@stapp02 ~]$
+logout
+Connection to stapp02 closed.
+thor@jumphost ~/kke$ ssh banner@stapp03
+[banner@stapp03 ~]$ sudo sed -i 's/ansible/banner/g' /etc/sudoers
+
+We trust you have received the usual lecture from the local System
+Administrator. It usually boils down to these three things:
+
+    #1) Respect the privacy of others.
+    #2) Think before you type.
+    #3) With great power comes great responsibility.
+
+[sudo] password for banner:
+[banner@stapp03 ~]$ ls -ltr
+total 0
+[banner@stapp03 ~]$ git status
+fatal: not a git repository (or any of the parent directories): .git
+[banner@stapp03 ~]$
+logout
+Connection to stapp03 closed.
+thor@jumphost ~/kke$ git status
+On branch main
+Your branch is ahead of 'origin/main' by 1 commit.
+  (use "git push" to publish your local commits)
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        deleted:    setup_sshauth.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        tmuxsessiondetails.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+thor@jumphost ~/kke$ ls -ltr
+total 52
+-rw-r--r-- 1 thor thor   143 Dec 19 16:21 setup_tmux.bash
+-rw-r--r-- 1 thor thor   100 Dec 19 16:21 README.md
+-rw-r--r-- 1 thor thor 35149 Dec 19 16:21 LICENSE
+-rw-r--r-- 1 thor thor    48 Dec 19 16:24 tmuxsessiondetails.txt
+-rw-r--r-- 1 thor thor   225 Dec 19 16:28 setup_sshauth.bash
+thor@jumphost ~/kke$ cp setup_sshauth.bash install_iptables.bash
+thor@jumphost ~/kke$ ls -ltr
+total 56
+-rw-r--r-- 1 thor thor   143 Dec 19 16:21 setup_tmux.bash
+-rw-r--r-- 1 thor thor   100 Dec 19 16:21 README.md
+-rw-r--r-- 1 thor thor 35149 Dec 19 16:21 LICENSE
+-rw-r--r-- 1 thor thor    48 Dec 19 16:24 tmuxsessiondetails.txt
+-rw-r--r-- 1 thor thor   225 Dec 19 16:28 setup_sshauth.bash
+-rw-r--r-- 1 thor thor   225 Dec 19 16:36 install_iptables.bash
+thor@jumphost ~/kke$ vi install_iptables.bash
+thor@jumphost ~/kke$ git status
+On branch main
+Your branch is ahead of 'origin/main' by 1 commit.
+  (use "git push" to publish your local commits)
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        deleted:    setup_sshauth.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        install_iptables.bash
+        tmuxsessiondetails.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+thor@jumphost ~/kke$ more  install_iptables.bash
+userarr=(tony steve banner)
+hostarr=(stapp01 stapp02 stapp03)
+#passarr=()
+
+for i in ${!userarr[*]}
+  do
+    echo "starting ${userarr[i]}@${hostarr[i]}"
+    ssh ${userarr[i]}@${hostarr[i]} sudo yum -y install iptables
+  done
+thor@jumphost ~/kke$ bash  install_iptables.bash
+starting tony@stapp01
+CentOS Stream 9 - BaseOS                         23 kB/s | 6.3 kB     00:00
+CentOS Stream 9 - BaseOS                         22 MB/s | 8.4 MB     00:00
+CentOS Stream 9 - AppStream                      26 kB/s | 6.4 kB     00:00
+CentOS Stream 9 - AppStream                     3.9 MB/s |  21 MB     00:05
+CentOS Stream 9 - Extras packages                58 kB/s | 6.9 kB     00:00
+CentOS Stream 9 - Extras packages                46 kB/s |  19 kB     00:00
+Docker CE Stable - x86_64                        45 kB/s | 3.5 kB     00:00
+Docker CE Stable - x86_64                       273 kB/s |  61 kB     00:00
+Extra Packages for Enterprise Linux 9 - x86_64  143 kB/s |  34 kB     00:00
+Extra Packages for Enterprise Linux 9 - x86_64   26 MB/s |  23 MB     00:00
+Extra Packages for Enterprise Linux 9 openh264  8.0 kB/s | 993  B     00:00
+Extra Packages for Enterprise Linux 9 - Next -  151 kB/s |  25 kB     00:00
+Extra Packages for Enterprise Linux 9 - Next -  412 kB/s | 229 kB     00:00
+Package iptables-legacy-1.8.10-2.2.el9.x86_64 is already installed.
+Dependencies resolved.
+================================================================================
+ Package                 Arch      Version                   Repository    Size
+================================================================================
+Upgrading:
+ iptables-legacy         x86_64    1.8.10-6.1.el9.next       epel-next     50 k
+ iptables-legacy-libs    x86_64    1.8.10-6.1.el9.next       epel-next     38 k
+ iptables-libs           x86_64    1.8.10-6.el9              baseos       461 k
+
+Transaction Summary
+================================================================================
+Upgrade  3 Packages
+
+Total download size: 549 k
+Downloading Packages:
+(1/3): iptables-legacy-libs-1.8.10-6.1.el9.next 329 kB/s |  38 kB     00:00
+(2/3): iptables-legacy-1.8.10-6.1.el9.next.x86_ 363 kB/s |  50 kB     00:00
+(3/3): iptables-libs-1.8.10-6.el9.x86_64.rpm    2.7 MB/s | 461 kB     00:00
+--------------------------------------------------------------------------------
+Total                                           920 kB/s | 549 kB     00:00
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                        1/1
+  Upgrading        : iptables-legacy-libs-1.8.10-6.1.el9.next.x86_64        1/6
+  Upgrading        : iptables-libs-1.8.10-6.el9.x86_64                      2/6
+  Upgrading        : iptables-legacy-1.8.10-6.1.el9.next.x86_64             3/6
+  Running scriptlet: iptables-legacy-1.8.10-6.1.el9.next.x86_64             3/6
+  Cleanup          : iptables-legacy-1.8.10-2.2.el9.x86_64                  4/6
+  Running scriptlet: iptables-legacy-1.8.10-2.2.el9.x86_64                  4/6
+  Cleanup          : iptables-libs-1.8.10-2.el9.x86_64                      5/6
+  Cleanup          : iptables-legacy-libs-1.8.10-2.2.el9.x86_64             6/6
+  Running scriptlet: iptables-legacy-libs-1.8.10-2.2.el9.x86_64             6/6
+  Verifying        : iptables-libs-1.8.10-6.el9.x86_64                      1/6
+  Verifying        : iptables-libs-1.8.10-2.el9.x86_64                      2/6
+  Verifying        : iptables-legacy-1.8.10-6.1.el9.next.x86_64             3/6
+  Verifying        : iptables-legacy-1.8.10-2.2.el9.x86_64                  4/6
+  Verifying        : iptables-legacy-libs-1.8.10-6.1.el9.next.x86_64        5/6
+  Verifying        : iptables-legacy-libs-1.8.10-2.2.el9.x86_64             6/6
+
+Upgraded:
+  iptables-legacy-1.8.10-6.1.el9.next.x86_64
+  iptables-legacy-libs-1.8.10-6.1.el9.next.x86_64
+  iptables-libs-1.8.10-6.el9.x86_64
+
+Complete!
+starting steve@stapp02
+Last metadata expiration check: 0:02:53 ago on Thu Dec 19 16:36:10 2024.
+Package iptables-legacy-1.8.10-2.2.el9.x86_64 is already installed.
+Dependencies resolved.
+================================================================================
+ Package                 Arch      Version                   Repository    Size
+================================================================================
+Upgrading:
+ iptables-legacy         x86_64    1.8.10-6.1.el9.next       epel-next     50 k
+ iptables-legacy-libs    x86_64    1.8.10-6.1.el9.next       epel-next     38 k
+ iptables-libs           x86_64    1.8.10-6.el9              baseos       461 k
+
+Transaction Summary
+================================================================================
+Upgrade  3 Packages
+
+Total download size: 549 k
+Downloading Packages:
+(1/3): iptables-legacy-libs-1.8.10-6.1.el9.next 174 kB/s |  38 kB     00:00
+(2/3): iptables-libs-1.8.10-6.el9.x86_64.rpm    1.9 MB/s | 461 kB     00:00
+(3/3): iptables-legacy-1.8.10-6.1.el9.next.x86_ 209 kB/s |  50 kB     00:00
+--------------------------------------------------------------------------------
+Total                                           995 kB/s | 549 kB     00:00
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                        1/1
+  Upgrading        : iptables-legacy-libs-1.8.10-6.1.el9.next.x86_64        1/6
+  Upgrading        : iptables-libs-1.8.10-6.el9.x86_64                      2/6
+  Upgrading        : iptables-legacy-1.8.10-6.1.el9.next.x86_64             3/6
+  Running scriptlet: iptables-legacy-1.8.10-6.1.el9.next.x86_64             3/6
+  Cleanup          : iptables-legacy-1.8.10-2.2.el9.x86_64                  4/6
+  Running scriptlet: iptables-legacy-1.8.10-2.2.el9.x86_64                  4/6
+  Cleanup          : iptables-libs-1.8.10-2.el9.x86_64                      5/6
+  Cleanup          : iptables-legacy-libs-1.8.10-2.2.el9.x86_64             6/6
+  Running scriptlet: iptables-legacy-libs-1.8.10-2.2.el9.x86_64             6/6
+  Verifying        : iptables-libs-1.8.10-6.el9.x86_64                      1/6
+  Verifying        : iptables-libs-1.8.10-2.el9.x86_64                      2/6
+  Verifying        : iptables-legacy-1.8.10-6.1.el9.next.x86_64             3/6
+  Verifying        : iptables-legacy-1.8.10-2.2.el9.x86_64                  4/6
+  Verifying        : iptables-legacy-libs-1.8.10-6.1.el9.next.x86_64        5/6
+  Verifying        : iptables-legacy-libs-1.8.10-2.2.el9.x86_64             6/6
+
+Upgraded:
+  iptables-legacy-1.8.10-6.1.el9.next.x86_64
+  iptables-legacy-libs-1.8.10-6.1.el9.next.x86_64
+  iptables-libs-1.8.10-6.el9.x86_64
+
+Complete!
+starting banner@stapp03
+CentOS Stream 9 - BaseOS                         43 kB/s | 6.3 kB     00:00
+CentOS Stream 9 - BaseOS                         14 MB/s | 8.4 MB     00:00
+CentOS Stream 9 - AppStream                      44 kB/s | 6.4 kB     00:00
+CentOS Stream 9 - AppStream                      28 MB/s |  21 MB     00:00
+CentOS Stream 9 - Extras packages                53 kB/s | 6.9 kB     00:00
+CentOS Stream 9 - Extras packages                53 kB/s |  19 kB     00:00
+Docker CE Stable - x86_64                        52 kB/s | 3.5 kB     00:00
+Docker CE Stable - x86_64                       556 kB/s |  61 kB     00:00
+Extra Packages for Enterprise Linux 9 - x86_64  146 kB/s |  34 kB     00:00
+Extra Packages for Enterprise Linux 9 - x86_64   12 MB/s |  23 MB     00:01
+Extra Packages for Enterprise Linux 9 openh264  6.0 kB/s | 993  B     00:00
+Extra Packages for Enterprise Linux 9 - Next -  125 kB/s |  25 kB     00:00
+Extra Packages for Enterprise Linux 9 - Next -  361 kB/s | 229 kB     00:00
+Package iptables-legacy-1.8.10-2.2.el9.x86_64 is already installed.
+Dependencies resolved.
+================================================================================
+ Package                 Arch      Version                   Repository    Size
+================================================================================
+Upgrading:
+ iptables-legacy         x86_64    1.8.10-6.1.el9.next       epel-next     50 k
+ iptables-legacy-libs    x86_64    1.8.10-6.1.el9.next       epel-next     38 k
+ iptables-libs           x86_64    1.8.10-6.el9              baseos       461 k
+
+Transaction Summary
+================================================================================
+Upgrade  3 Packages
+
+Total download size: 549 k
+Downloading Packages:
+(1/3): iptables-legacy-libs-1.8.10-6.1.el9.next 313 kB/s |  38 kB     00:00
+(2/3): iptables-legacy-1.8.10-6.1.el9.next.x86_ 363 kB/s |  50 kB     00:00
+(3/3): iptables-libs-1.8.10-6.el9.x86_64.rpm    923 kB/s | 461 kB     00:00
+--------------------------------------------------------------------------------
+Total                                           535 kB/s | 549 kB     00:01
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                        1/1
+  Upgrading        : iptables-legacy-libs-1.8.10-6.1.el9.next.x86_64        1/6
+  Upgrading        : iptables-libs-1.8.10-6.el9.x86_64                      2/6
+  Upgrading        : iptables-legacy-1.8.10-6.1.el9.next.x86_64             3/6
+  Running scriptlet: iptables-legacy-1.8.10-6.1.el9.next.x86_64             3/6
+  Cleanup          : iptables-legacy-1.8.10-2.2.el9.x86_64                  4/6
+  Running scriptlet: iptables-legacy-1.8.10-2.2.el9.x86_64                  4/6
+  Cleanup          : iptables-libs-1.8.10-2.el9.x86_64                      5/6
+  Cleanup          : iptables-legacy-libs-1.8.10-2.2.el9.x86_64             6/6
+  Running scriptlet: iptables-legacy-libs-1.8.10-2.2.el9.x86_64             6/6
+  Verifying        : iptables-libs-1.8.10-6.el9.x86_64                      1/6
+  Verifying        : iptables-libs-1.8.10-2.el9.x86_64                      2/6
+  Verifying        : iptables-legacy-1.8.10-6.1.el9.next.x86_64             3/6
+  Verifying        : iptables-legacy-1.8.10-2.2.el9.x86_64                  4/6
+  Verifying        : iptables-legacy-libs-1.8.10-6.1.el9.next.x86_64        5/6
+  Verifying        : iptables-legacy-libs-1.8.10-2.2.el9.x86_64             6/6
+
+Upgraded:
+  iptables-legacy-1.8.10-6.1.el9.next.x86_64
+  iptables-legacy-libs-1.8.10-6.1.el9.next.x86_64
+  iptables-libs-1.8.10-6.el9.x86_64
+
+Complete!
+thor@jumphost ~/kke$ git status
+On branch main
+Your branch is ahead of 'origin/main' by 1 commit.
+  (use "git push" to publish your local commits)
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        deleted:    setup_sshauth.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        install_iptables.bash
+        tmuxsessiondetails.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+thor@jumphost ~/kke$ git add install_iptables.bash
+thor@jumphost ~/kke$ git status
+On branch main
+Your branch is ahead of 'origin/main' by 1 commit.
+  (use "git push" to publish your local commits)
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        new file:   install_iptables.bash
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        deleted:    setup_sshauth.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        tmuxsessiondetails.txt
+
+thor@jumphost ~/kke$ git commit -m "add install iptables script"
+[main 7e54baa] add install iptables script
+ Committer: codinglearner55 <thor@jumphost.stratos.xfusioncorp.com>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 9 insertions(+)
+ create mode 100644 install_iptables.bash
+thor@jumphost ~/kke$ ssh tony@stapp01
+Last login: Thu Dec 19 16:34:32 2024 from 172.16.238.3
+[tony@stapp01 ~]$ sudo systemctl status iptables
+
+Unit iptables.service could not be found.
+[tony@stapp01 ~]$
+[tony@stapp01 ~]$
+[tony@stapp01 ~]$
+[tony@stapp01 ~]$
+[tony@stapp01 ~]$ iptables
+iptables v1.8.10 (legacy): no command specified
+Try `iptables -h' or 'iptables --help' for more information.
+[tony@stapp01 ~]$ sudo systemctl status iptables
+Unit iptables.service could not be found.
+[tony@stapp01 ~]$ sudo systemctl status firewalld
+Unit firewalld.service could not be found.
+[tony@stapp01 ~]$ iptables -S
+Fatal: can't open lock file /run/xtables.lock: Permission denied
+[tony@stapp01 ~]$ sudo iptables -S
+
+-P INPUT ACCEPT
+-P FORWARD ACCEPT
+-P OUTPUT ACCEPT
+-N DOCKER
+-N DOCKER-ISOLATION-STAGE-1
+-N DOCKER-ISOLATION-STAGE-2
+-N DOCKER-USER
+-A FORWARD -j DOCKER-USER
+-A FORWARD -j DOCKER-ISOLATION-STAGE-1
+-A FORWARD -o docker0 -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+-A FORWARD -o docker0 -j DOCKER
+-A FORWARD -i docker0 ! -o docker0 -j ACCEPT
+-A FORWARD -i docker0 -o docker0 -j ACCEPT
+-A DOCKER-ISOLATION-STAGE-1 -i docker0 ! -o docker0 -j DOCKER-ISOLATION-STAGE-2
+-A DOCKER-ISOLATION-STAGE-1 -j RETURN
+-A DOCKER-ISOLATION-STAGE-2 -o docker0 -j DROP
+-A DOCKER-ISOLATION-STAGE-2 -j RETURN
+-A DOCKER-USER -j RETURN
+[tony@stapp01 ~]$ service iptables status
+Redirecting to /bin/systemctl status iptables.service
+Unit iptables.service could not be found.
+[tony@stapp01 ~]$ service iptables save
+The service command supports only basic LSB actions (start, stop, restart, try-restart, r
+eload, reload-or-restart, try-reload-or-restart, force-reload, status, condrestart). For
+other actions, please try to use systemctl.
+[tony@stapp01 ~]$ sudo yum search iptables
+Last metadata expiration check: 0:04:21 ago on Thu Dec 19 16:38:57 2024.
+=========================================================== Name & Summary Matched: iptab
+les ===========================================================
+iptables-devel.i686 : Development package for iptables
+iptables-devel.x86_64 : Development package for iptables
+iptables-legacy-devel.x86_64 : Development package for legacy iptables
+iptables-legacy-libs.x86_64 : iptables legacy libraries
+iptables-libs.x86_64 : libxtables and iptables extensions userspace support
+iptables-libs.i686 : libxtables and iptables extensions userspace support
+iptables-nft.x86_64 : nftables compatibility for iptables, arptables and ebtables
+iptables-nft-services.noarch : Services for nft-variants of iptables, ebtables and arptab
+les
+iptables-services.noarch : iptables and ip6tables services for iptables
+iptables-utils.x86_64 : iptables and ip6tables misc utilities
+sshguard-iptables.x86_64 : Configuration for iptables backend of SSHGuard
+================================================================ Name Matched: iptables =
+===============================================================
+iptables-legacy.x86_64 : Legacy tools for managing Linux kernel packet filtering capabili
+ties
+============================================================== Summary Matched: iptables
+===============================================================
+bpfmon.x86_64 : Traffic monitor for BPF expression/iptables rule
+[tony@stapp01 ~]$
+[tony@stapp01 ~]$
+[tony@stapp01 ~]$
+logout
+Connection to stapp01 closed.
+thor@jumphost ~/kke$ ls -ltr
+total 56
+-rw-r--r-- 1 thor thor   143 Dec 19 16:21 setup_tmux.bash
+-rw-r--r-- 1 thor thor   100 Dec 19 16:21 README.md
+-rw-r--r-- 1 thor thor 35149 Dec 19 16:21 LICENSE
+-rw-r--r-- 1 thor thor    48 Dec 19 16:24 tmuxsessiondetails.txt
+-rw-r--r-- 1 thor thor   225 Dec 19 16:28 setup_sshauth.bash
+-rw-r--r-- 1 thor thor   225 Dec 19 16:37 install_iptables.bash
+thor@jumphost ~/kke$ vi install_iptables.bash
+thor@jumphost ~/kke$ vi install_iptables.bash
+thor@jumphost ~/kke$ more  install_iptables.bash
+
+userarr=(tony steve banner)
+hostarr=(stapp01 stapp02 stapp03)
+#passarr=()
+
+for i in ${!userarr[*]}
+  do
+    echo "starting ${userarr[i]}@${hostarr[i]}"
+    #ssh ${userarr[i]}@${hostarr[i]} sudo yum -y install iptables
+    ssh ${userarr[i]}@${hostarr[i]} sudo yum -y install iptables-services
+  done
+thor@jumphost ~/kke$ more  install_iptables.bash
+
+userarr=(tony steve banner)
+hostarr=(stapp01 stapp02 stapp03)
+#passarr=()
+
+for i in ${!userarr[*]}
+  do
+    echo "starting ${userarr[i]}@${hostarr[i]}"
+    #ssh ${userarr[i]}@${hostarr[i]} sudo yum -y install iptables
+    ssh ${userarr[i]}@${hostarr[i]} sudo yum -y install iptables-services
+  done
+thor@jumphost ~/kke$ bash  install_iptables.bash
+
+starting tony@stapp01
+Last metadata expiration check: 0:05:27 ago on Thu Dec 19 16:38:57 2024.
+Dependencies resolved.
+================================================================================
+ Package               Arch       Version                   Repository     Size
+================================================================================
+Installing:
+ iptables-services     noarch     1.8.10-6.1.el9.next       epel-next      16 k
+
+Transaction Summary
+================================================================================
+Install  1 Package
+
+Total download size: 16 k
+Installed size: 27 k
+Downloading Packages:
+iptables-services-1.8.10-6.1.el9.next.noarch.rp  23 kB/s |  16 kB     00:00
+--------------------------------------------------------------------------------
+Total                                            18 kB/s |  16 kB     00:00
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                        1/1
+  Installing       : iptables-services-1.8.10-6.1.el9.next.noarch           1/1
+  Running scriptlet: iptables-services-1.8.10-6.1.el9.next.noarch           1/1
+  Verifying        : iptables-services-1.8.10-6.1.el9.next.noarch           1/1
+
+Installed:
+  iptables-services-1.8.10-6.1.el9.next.noarch
+
+Complete!
+starting steve@stapp02
+Last metadata expiration check: 0:08:17 ago on Thu Dec 19 16:36:10 2024.
+Dependencies resolved.
+================================================================================
+ Package               Arch       Version                   Repository     Size
+================================================================================
+Installing:
+ iptables-services     noarch     1.8.10-6.1.el9.next       epel-next      16 k
+
+Transaction Summary
+================================================================================
+Install  1 Package
+
+Total download size: 16 k
+Installed size: 27 k
+Downloading Packages:
+iptables-services-1.8.10-6.1.el9.next.noarch.rp 122 kB/s |  16 kB     00:00
+--------------------------------------------------------------------------------
+Total                                            49 kB/s |  16 kB     00:00
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                        1/1
+  Installing       : iptables-services-1.8.10-6.1.el9.next.noarch           1/1
+  Running scriptlet: iptables-services-1.8.10-6.1.el9.next.noarch           1/1
+  Verifying        : iptables-services-1.8.10-6.1.el9.next.noarch           1/1
+
+Installed:
+  iptables-services-1.8.10-6.1.el9.next.noarch
+
+Complete!
+starting banner@stapp03
+Last metadata expiration check: 0:04:56 ago on Thu Dec 19 16:39:34 2024.
+Dependencies resolved.
+================================================================================
+ Package               Arch       Version                   Repository     Size
+================================================================================
+Installing:
+ iptables-services     noarch     1.8.10-6.1.el9.next       epel-next      16 k
+
+Transaction Summary
+================================================================================
+Install  1 Package
+
+Total download size: 16 k
+Installed size: 27 k
+Downloading Packages:
+iptables-services-1.8.10-6.1.el9.next.noarch.rp 122 kB/s |  16 kB     00:00
+--------------------------------------------------------------------------------
+Total                                            49 kB/s |  16 kB     00:00
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                        1/1
+  Installing       : iptables-services-1.8.10-6.1.el9.next.noarch           1/1
+  Running scriptlet: iptables-services-1.8.10-6.1.el9.next.noarch           1/1
+  Verifying        : iptables-services-1.8.10-6.1.el9.next.noarch           1/1
+
+Installed:
+  iptables-services-1.8.10-6.1.el9.next.noarch
+
+Complete!
+thor@jumphost ~/kke$ ssh tony@stapp01
+
+Last login: Thu Dec 19 16:40:48 2024 from 172.16.238.3
+[tony@stapp01 ~]$ systemctl status iptables
+○ iptables.service - IPv4 firewall with iptables
+     Loaded: loaded (/usr/lib/systemd/system/iptables.service; disabled; preset: disabled
+)
+     Active: inactive (dead)
+
+Dec 19 16:41:18 stapp01.stratos.xfusioncorp.com systemd[1]: iptables.service: Failed to l
+oad configuration: No such file or directory
+Dec 19 16:41:18 stapp01.stratos.xfusioncorp.com systemd[1]: iptables.service: Collecting.
+Dec 19 16:41:54 stapp01.stratos.xfusioncorp.com systemd[1]: iptables.service: Failed to l
+oad configuration: No such file or directory
+Dec 19 16:41:54 stapp01.stratos.xfusioncorp.com systemd[1]: iptables.service: Collecting.
+Dec 19 16:42:43 stapp01.stratos.xfusioncorp.com systemd[1]: iptables.service: Failed to l
+oad configuration: No such file or directory
+Dec 19 16:42:43 stapp01.stratos.xfusioncorp.com systemd[1]: iptables.service: Collecting.
+Dec 19 16:44:48 stapp01.stratos.xfusioncorp.com systemd[1]: iptables.service: Collecting.
+[tony@stapp01 ~]$
+[tony@stapp01 ~]$
+[tony@stapp01 ~]$
+logout
+Connection to stapp01 closed.
+thor@jumphost ~/kke$ vi install_iptables.bash
+
+thor@jumphost ~/kke$ more  install_iptables.bash
+
+userarr=(tony steve banner)
+hostarr=(stapp01 stapp02 stapp03)
+#passarr=()
+
+for i in ${!userarr[*]}
+  do
+    echo "starting ${userarr[i]}@${hostarr[i]}"
+    #ssh ${userarr[i]}@${hostarr[i]} sudo yum -y install iptables
+    #ssh ${userarr[i]}@${hostarr[i]} sudo yum -y install iptables-services
+    ssh ${userarr[i]}@${hostarr[i]} sudo systemctl enable iptables
+    ssh ${userarr[i]}@${hostarr[i]} sudo systemctl start iptables
+  done
+thor@jumphost ~/kke$ bash  install_iptables.bash
+
+starting tony@stapp01
+Created symlink /etc/systemd/system/multi-user.target.wants/iptables.service → /usr/lib/s
+ystemd/system/iptables.service.
+starting steve@stapp02
+Created symlink /etc/systemd/system/multi-user.target.wants/iptables.service → /usr/lib/s
+ystemd/system/iptables.service.
+starting banner@stapp03
+Created symlink /etc/systemd/system/multi-user.target.wants/iptables.service → /usr/lib/s
+ystemd/system/iptables.service.
+thor@jumphost ~/kke$ ssh tony@stapp01
+
+Last login: Thu Dec 19 16:44:37 2024 from 172.16.238.3
+[tony@stapp01 ~]$ systemctl status iptables
+
+● iptables.service - IPv4 firewall with iptables
+     Loaded: loaded (/usr/lib/systemd/system/iptables.service; enabled; preset: disabled)
+     Active: active (exited) since Thu 2024-12-19 16:46:16 UTC; 13s ago
+    Process: 7613 ExecStart=/usr/libexec/iptables/iptables.init start (code=exited, statu
+s=0/SUCCESS)
+   Main PID: 7613 (code=exited, status=0/SUCCESS)
+
+Dec 19 16:46:16 stapp01.stratos.xfusioncorp.com systemd[1]: iptables.service: Changed dea
+d -> start
+Dec 19 16:46:16 stapp01.stratos.xfusioncorp.com systemd[1]: Starting IPv4 firewall with i
+ptables...
+Dec 19 16:46:16 stapp01.stratos.xfusioncorp.com systemd[7613]: iptables.service: Executin
+g: /usr/libexec/iptables/iptables.init start
+Dec 19 16:46:16 stapp01.stratos.xfusioncorp.com iptables.init[7613]: iptables: Applying f
+irewall rules: [  OK  ]
+Dec 19 16:46:16 stapp01.stratos.xfusioncorp.com systemd[1]: iptables.service: Child 7613
+belongs to iptables.service.
+Dec 19 16:46:16 stapp01.stratos.xfusioncorp.com systemd[1]: iptables.service: Main proces
+s exited, code=exited, status=0/SUCCESS (success)
+Dec 19 16:46:16 stapp01.stratos.xfusioncorp.com systemd[1]: iptables.service: Changed sta
+rt -> exited
+Dec 19 16:46:16 stapp01.stratos.xfusioncorp.com systemd[1]: iptables.service: Job 999 ipt
+ables.service/start finished, result=done
+Dec 19 16:46:16 stapp01.stratos.xfusioncorp.com systemd[1]: Finished IPv4 firewall with i
+ptables.
+Dec 19 16:46:16 stapp01.stratos.xfusioncorp.com systemd[1]: iptables.service: Failed to s
+end unit change signal for iptables.service: Connection reset >
+...skipping...
+● iptables.service - IPv4 firewall with iptables
+     Loaded: loaded (/usr/lib/systemd/system/iptables.service; enabled; preset: disabled)
+     Active: active (exited) since Thu 2024-12-19 16:46:16 UTC; 13s ago
+    Process: 7613 ExecStart=/usr/libexec/iptables/iptables.init start (code=exited, statu
+s=0/SUCCESS)
+   Main PID: 7613 (code=exited, status=0/SUCCESS)
+
+Dec 19 16:46:16 stapp01.stratos.xfusioncorp.com systemd[1]: iptables.service: Changed dea
+d -> start
+Dec 19 16:46:16 stapp01.stratos.xfusioncorp.com systemd[1]: Starting IPv4 firewall with i
+ptables...
+Dec 19 16:46:16 stapp01.stratos.xfusioncorp.com systemd[7613]: iptables.service: Executin
+g: /usr/libexec/iptables/iptables.init start
+Dec 19 16:46:16 stapp01.stratos.xfusioncorp.com iptables.init[7613]: iptables: Applying f
+irewall rules: [  OK  ]
+Dec 19 16:46:16 stapp01.stratos.xfusioncorp.com systemd[1]: iptables.service: Child 7613
+belongs to iptables.service.
+Dec 19 16:46:16 stapp01.stratos.xfusioncorp.com systemd[1]: iptables.service: Main proces
+s exited, code=exited, status=0/SUCCESS (success)
+Dec 19 16:46:16 stapp01.stratos.xfusioncorp.com systemd[1]: iptables.service: Changed sta
+rt -> exited
+Dec 19 16:46:16 stapp01.stratos.xfusioncorp.com systemd[1]: iptables.service: Job 999 ipt
+ables.service/start finished, result=done
+Dec 19 16:46:16 stapp01.stratos.xfusioncorp.com systemd[1]: Finished IPv4 firewall with i
+ptables.
+Dec 19 16:46:16 stapp01.stratos.xfusioncorp.com systemd[1]: iptables.service: Failed to s
+end unit change signal for iptables.service: Connection reset >
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+~
+[tony@stapp01 ~]$
+[tony@stapp01 ~]$ q:q
+-bash: q:q: command not found
+[tony@stapp01 ~]$ #sudo iptables -A INPUT -p tcp --dport 5000  -j DROP
+[tony@stapp01 ~]$ sudo iptables -A INPUT -p tcp --dport 5000  -j DROP
+
+[tony@stapp01 ~]$ #sudo  iptables -A INPUT -p tcp --dport 5000 -s 172.16.238.14  -j ACCEP
+T
+[tony@stapp01 ~]$ sudo  iptables -A INPUT -p tcp --dport 5000 -s 172.16.238.14  -j ACCEPT
+
+[tony@stapp01 ~]$ sudo iptables -L -v
+Chain INPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+  451  155K ACCEPT     all  --  any    any     anywhere             anywhere
+state RELATED,ESTABLISHED
+    0     0 ACCEPT     icmp --  any    any     anywhere             anywhere
+   12   812 ACCEPT     all  --  lo     any     anywhere             anywhere
+    1    60 ACCEPT     tcp  --  any    any     anywhere             anywhere
+state NEW tcp dpt:ssh
+    0     0 REJECT     all  --  any    any     anywhere             anywhere
+reject-with icmp-host-prohibited
+    0     0 DROP       tcp  --  any    any     anywhere             anywhere
+tcp dpt:commplex-main
+    0     0 ACCEPT     tcp  --  any    any     stlb01               anywhere
+tcp dpt:commplex-main
+
+Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+    0     0 REJECT     all  --  any    any     anywhere             anywhere
+reject-with icmp-host-prohibited
+
+Chain OUTPUT (policy ACCEPT 389 packets, 44870 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+[tony@stapp01 ~]$ sudo service iptables save
+iptables: Saving firewall rules to /etc/sysconfig/iptables: [  OK  ]
+[tony@stapp01 ~]$
+[tony@stapp01 ~]$
+[tony@stapp01 ~]$ sudo iptables -S
+
+-P INPUT ACCEPT
+-P FORWARD ACCEPT
+-P OUTPUT ACCEPT
+-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+-A INPUT -p icmp -j ACCEPT
+-A INPUT -i lo -j ACCEPT
+-A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT
+-A INPUT -j REJECT --reject-with icmp-host-prohibited
+-A INPUT -p tcp -m tcp --dport 5000 -j DROP
+-A INPUT -s 172.16.238.14/32 -p tcp -m tcp --dport 5000 -j ACCEPT
+-A FORWARD -j REJECT --reject-with icmp-host-prohibited
+[tony@stapp01 ~]$
+[tony@stapp01 ~]$
+logout
+Connection to stapp01 closed.
+thor@jumphost ~/kke$ sudo iptables -l -V
+[sudo] password for thor:
+sudo: a password is required
+thor@jumphost ~/kke$ ssh steve@stapp02
+
+Last login: Thu Dec 19 16:35:29 2024 from 172.16.238.3
+[steve@stapp02 ~]$ sudo iptables -L -v
+Chain INPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+   68  7885 ACCEPT     all  --  any    any     anywhere             anywhere
+state RELATED,ESTABLISHED
+    0     0 ACCEPT     icmp --  any    any     anywhere             anywhere
+    0     0 ACCEPT     all  --  lo     any     anywhere             anywhere
+    1    60 ACCEPT     tcp  --  any    any     anywhere             anywhere
+state NEW tcp dpt:ssh
+    0     0 REJECT     all  --  any    any     anywhere             anywhere
+reject-with icmp-host-prohibited
+
+Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+    0     0 REJECT     all  --  any    any     anywhere             anywhere
+reject-with icmp-host-prohibited
+
+Chain OUTPUT (policy ACCEPT 50 packets, 6953 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+[steve@stapp02 ~]$  sudo iptables -A INPUT -p tcp --dport 5000  -j DROP
+[steve@stapp02 ~]$  sudo  iptables -A INPUT -p tcp --dport 5000 -s 172.16.238.14  -j ACCE
+PT
+[steve@stapp02 ~]$ sudo iptables -L -v
+
+Chain INPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+   95  9785 ACCEPT     all  --  any    any     anywhere             anywhere
+state RELATED,ESTABLISHED
+    0     0 ACCEPT     icmp --  any    any     anywhere             anywhere
+    0     0 ACCEPT     all  --  lo     any     anywhere             anywhere
+    1    60 ACCEPT     tcp  --  any    any     anywhere             anywhere
+state NEW tcp dpt:ssh
+    0     0 REJECT     all  --  any    any     anywhere             anywhere
+reject-with icmp-host-prohibited
+    0     0 DROP       tcp  --  any    any     anywhere             anywhere
+tcp dpt:commplex-main
+    0     0 ACCEPT     tcp  --  any    any     stlb01               anywhere
+tcp dpt:commplex-main
+
+Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+    0     0 REJECT     all  --  any    any     anywhere             anywhere
+reject-with icmp-host-prohibited
+
+Chain OUTPUT (policy ACCEPT 69 packets, 10689 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+[steve@stapp02 ~]$  sudo  iptables -D INPUT -p tcp --dport 5000 -s 172.16.238.14  -j ACCE
+PT
+[steve@stapp02 ~]$  sudo iptables -D INPUT -p tcp --dport 5000  -j DROP
+
+[steve@stapp02 ~]$  sudo  iptables -A INPUT -p tcp --dport 5000 -s 172.16.238.14  -j ACCE
+PT
+[steve@stapp02 ~]$  sudo iptables -A INPUT -p tcp --dport 5000  -j DROP
+
+[steve@stapp02 ~]$ sudo iptables -L -v
+
+Chain INPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+  368 30441 ACCEPT     all  --  any    any     anywhere             anywhere
+state RELATED,ESTABLISHED
+    0     0 ACCEPT     icmp --  any    any     anywhere             anywhere
+    0     0 ACCEPT     all  --  lo     any     anywhere             anywhere
+    1    60 ACCEPT     tcp  --  any    any     anywhere             anywhere
+state NEW tcp dpt:ssh
+    0     0 REJECT     all  --  any    any     anywhere             anywhere
+reject-with icmp-host-prohibited
+    0     0 ACCEPT     tcp  --  any    any     stlb01               anywhere
+tcp dpt:commplex-main
+    0     0 DROP       tcp  --  any    any     anywhere             anywhere
+tcp dpt:commplex-main
+
+Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+    0     0 REJECT     all  --  any    any     anywhere             anywhere
+reject-with icmp-host-prohibited
+
+Chain OUTPUT (policy ACCEPT 215 packets, 28401 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+[steve@stapp02 ~]$
+[steve@stapp02 ~]$
+[steve@stapp02 ~]$
+[steve@stapp02 ~]$ sudo iptables -L -v
+Chain INPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+  392 31885 ACCEPT     all  --  any    any     anywhere             anywhere
+state RELATED,ESTABLISHED
+    0     0 ACCEPT     icmp --  any    any     anywhere             anywhere
+    0     0 ACCEPT     all  --  lo     any     anywhere             anywhere
+    1    60 ACCEPT     tcp  --  any    any     anywhere             anywhere
+state NEW tcp dpt:ssh
+    0     0 REJECT     all  --  any    any     anywhere             anywhere
+reject-with icmp-host-prohibited
+    0     0 ACCEPT     tcp  --  any    any     stlb01               anywhere
+tcp dpt:commplex-main
+    0     0 DROP       tcp  --  any    any     anywhere             anywhere
+tcp dpt:commplex-main
+
+Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+    0     0 REJECT     all  --  any    any     anywhere             anywhere
+reject-with icmp-host-prohibited
+
+Chain OUTPUT (policy ACCEPT 234 packets, 31737 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+[steve@stapp02 ~]$
+[steve@stapp02 ~]$
+[steve@stapp02 ~]$ service iptables save
+
+iptables: Only usable by root.[WARNING]
+[steve@stapp02 ~]$ sudo service iptables save
+
+iptables: Saving firewall rules to /etc/sysconfig/iptables: [  OK  ]
+[steve@stapp02 ~]$
+[steve@stapp02 ~]$
+[steve@stapp02 ~]$
+logout
+Connection to stapp02 closed.
+thor@jumphost ~/kke$ ssh tony@stapp01
+
+Last login: Thu Dec 19 16:46:23 2024 from 172.16.238.3
+[tony@stapp01 ~]$
+
+[tony@stapp01 ~]$ sudo iptables -L -v
+
+Chain INPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+  718  177K ACCEPT     all  --  any    any     anywhere             anywhere
+state RELATED,ESTABLISHED
+    0     0 ACCEPT     icmp --  any    any     anywhere             anywhere
+   12   812 ACCEPT     all  --  lo     any     anywhere             anywhere
+    2   120 ACCEPT     tcp  --  any    any     anywhere             anywhere
+state NEW tcp dpt:ssh
+    0     0 REJECT     all  --  any    any     anywhere             anywhere
+reject-with icmp-host-prohibited
+    0     0 DROP       tcp  --  any    any     anywhere             anywhere
+tcp dpt:commplex-main
+    0     0 ACCEPT     tcp  --  any    any     stlb01               anywhere
+tcp dpt:commplex-main
+
+Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+    0     0 REJECT     all  --  any    any     anywhere             anywhere
+reject-with icmp-host-prohibited
+
+Chain OUTPUT (policy ACCEPT 554 packets, 65007 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+[tony@stapp01 ~]$ sudo iptables -D INPUT -p tcp --dport 5000  -j DROP
+
+[tony@stapp01 ~]$ sudo iptables -A INPUT -p tcp --dport 5000  -j DROP
+
+[tony@stapp01 ~]$ sudo iptables -L -v
+Chain INPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+  855  187K ACCEPT     all  --  any    any     anywhere             anywhere
+state RELATED,ESTABLISHED
+    0     0 ACCEPT     icmp --  any    any     anywhere             anywhere
+   12   812 ACCEPT     all  --  lo     any     anywhere             anywhere
+    2   120 ACCEPT     tcp  --  any    any     anywhere             anywhere
+state NEW tcp dpt:ssh
+    0     0 REJECT     all  --  any    any     anywhere             anywhere
+reject-with icmp-host-prohibited
+    0     0 ACCEPT     tcp  --  any    any     stlb01               anywhere
+tcp dpt:commplex-main
+    0     0 DROP       tcp  --  any    any     anywhere             anywhere
+tcp dpt:commplex-main
+
+Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+    0     0 REJECT     all  --  any    any     anywhere             anywhere
+reject-with icmp-host-prohibited
+
+Chain OUTPUT (policy ACCEPT 632 packets, 75371 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+[tony@stapp01 ~]$ sudo service iptables save
+
+iptables: Saving firewall rules to /etc/sysconfig/iptables: [  OK  ]
+[tony@stapp01 ~]$
+[tony@stapp01 ~]$
+[tony@stapp01 ~]$
+logout
+Connection to stapp01 closed.
+thor@jumphost ~/kke$ ssh banner@stapp03
+
+Last login: Thu Dec 19 16:36:00 2024 from 172.16.238.3
+[banner@stapp03 ~]$
+[banner@stapp03 ~]$
+[banner@stapp03 ~]$ ^C
+[banner@stapp03 ~]$  sudo  iptables -A INPUT -p tcp --dport 5000 -s 172.16.238.14  -j ACC
+EPT
+[banner@stapp03 ~]$ sudo iptables -A INPUT -p tcp --dport 5000  -j DROP
+[banner@stapp03 ~]$ sudo systemctl status iptables
+● iptables.service - IPv4 firewall with iptables
+     Loaded: loaded (/usr/lib/systemd/system/iptables.service; enabled; preset: disabled)
+     Active: active (exited) since Thu 2024-12-19 16:46:19 UTC; 6min ago
+    Process: 5666 ExecStart=/usr/libexec/iptables/iptables.init start (code=exited, statu
+s=0/SUCCESS)
+   Main PID: 5666 (code=exited, status=0/SUCCESS)
+
+Dec 19 16:46:19 stapp03.stratos.xfusioncorp.com systemd[1]: iptables.service: Changed dea
+d -> start
+Dec 19 16:46:19 stapp03.stratos.xfusioncorp.com systemd[1]: Starting IPv4 firewall with i
+ptables...
+Dec 19 16:46:19 stapp03.stratos.xfusioncorp.com systemd[5666]: iptables.service: Executin
+g: /usr/libexec/iptables/iptables.init start
+Dec 19 16:46:19 stapp03.stratos.xfusioncorp.com iptables.init[5666]: iptables: Applying f
+irewall rules: [  OK  ]
+Dec 19 16:46:19 stapp03.stratos.xfusioncorp.com systemd[1]: iptables.service: Child 5666
+belongs to iptables.service.
+Dec 19 16:46:19 stapp03.stratos.xfusioncorp.com systemd[1]: iptables.service: Main proces
+s exited, code=exited, status=0/SUCCESS (success)
+Dec 19 16:46:19 stapp03.stratos.xfusioncorp.com systemd[1]: iptables.service: Changed sta
+rt -> exited
+Dec 19 16:46:19 stapp03.stratos.xfusioncorp.com systemd[1]: iptables.service: Job 695 ipt
+ables.service/start finished, result=done
+Dec 19 16:46:19 stapp03.stratos.xfusioncorp.com systemd[1]: Finished IPv4 firewall with i
+ptables.
+Dec 19 16:46:19 stapp03.stratos.xfusioncorp.com systemd[1]: iptables.service: Failed to s
+end unit change signal for iptables.service: Connection reset >
+[banner@stapp03 ~]$ sudo iptables -L -v
+
+Chain INPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+  178 15569 ACCEPT     all  --  any    any     anywhere             anywhere
+state RELATED,ESTABLISHED
+    0     0 ACCEPT     icmp --  any    any     anywhere             anywhere
+    0     0 ACCEPT     all  --  lo     any     anywhere             anywhere
+    1    60 ACCEPT     tcp  --  any    any     anywhere             anywhere
+state NEW tcp dpt:ssh
+    0     0 REJECT     all  --  any    any     anywhere             anywhere
+reject-with icmp-host-prohibited
+    0     0 ACCEPT     tcp  --  any    any     stlb01               anywhere
+tcp dpt:commplex-main
+    0     0 DROP       tcp  --  any    any     anywhere             anywhere
+tcp dpt:commplex-main
+
+Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+    0     0 REJECT     all  --  any    any     anywhere             anywhere
+reject-with icmp-host-prohibited
+
+Chain OUTPUT (policy ACCEPT 116 packets, 16477 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+[banner@stapp03 ~]$ sudo iptables -S
+-P INPUT ACCEPT
+-P FORWARD ACCEPT
+-P OUTPUT ACCEPT
+-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+-A INPUT -p icmp -j ACCEPT
+-A INPUT -i lo -j ACCEPT
+-A INPUT -p tcp -m state --state NEW -m tcp --dport 22 -j ACCEPT
+-A INPUT -j REJECT --reject-with icmp-host-prohibited
+-A INPUT -s 172.16.238.14/32 -p tcp -m tcp --dport 5000 -j ACCEPT
+-A INPUT -p tcp -m tcp --dport 5000 -j DROP
+-A FORWARD -j REJECT --reject-with icmp-host-prohibited
+[banner@stapp03 ~]$ sudo iptables -D INPUT -j REJECT --reject-with icmp-host-prohibited
+
+[banner@stapp03 ~]$
+
+[banner@stapp03 ~]$
+[banner@stapp03 ~]$ service iptables save
+iptables: Only usable by root.[WARNING]
+[banner@stapp03 ~]$ sudo !!
+sudo service iptables save
+iptables: Saving firewall rules to /etc/sysconfig/iptables: [  OK  ]
+[banner@stapp03 ~]$
+[banner@stapp03 ~]$
+[banner@stapp03 ~]$
+logout
+Connection to stapp03 closed.
+thor@jumphost ~/kke$ ssh steve@stapp02
+
+Last login: Thu Dec 19 16:49:22 2024 from 172.16.238.3
+[steve@stapp02 ~]$ sudo iptables -L -v
+
+Chain INPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+  566 46970 ACCEPT     all  --  any    any     anywhere             anywhere
+state RELATED,ESTABLISHED
+    0     0 ACCEPT     icmp --  any    any     anywhere             anywhere
+    0     0 ACCEPT     all  --  lo     any     anywhere             anywhere
+    2   120 ACCEPT     tcp  --  any    any     anywhere             anywhere
+state NEW tcp dpt:ssh
+    0     0 REJECT     all  --  any    any     anywhere             anywhere
+reject-with icmp-host-prohibited
+    0     0 ACCEPT     tcp  --  any    any     stlb01               anywhere
+tcp dpt:commplex-main
+    0     0 DROP       tcp  --  any    any     anywhere             anywhere
+tcp dpt:commplex-main
+
+Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+    0     0 REJECT     all  --  any    any     anywhere             anywhere
+reject-with icmp-host-prohibited
+
+Chain OUTPUT (policy ACCEPT 351 packets, 47326 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+[steve@stapp02 ~]$ sudo iptables -D INPUT -j REJECT --reject-with icmp-host-prohibited
+[steve@stapp02 ~]$ sudo service iptables save
+
+iptables: Saving firewall rules to /etc/sysconfig/iptables: [  OK  ]
+[steve@stapp02 ~]$ sudo iptables -L -v
+Chain INPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+  607 49662 ACCEPT     all  --  any    any     anywhere             anywhere
+state RELATED,ESTABLISHED
+    0     0 ACCEPT     icmp --  any    any     anywhere             anywhere
+    0     0 ACCEPT     all  --  lo     any     anywhere             anywhere
+    2   120 ACCEPT     tcp  --  any    any     anywhere             anywhere
+state NEW tcp dpt:ssh
+    0     0 ACCEPT     tcp  --  any    any     stlb01               anywhere
+tcp dpt:commplex-main
+    0     0 DROP       tcp  --  any    any     anywhere             anywhere
+tcp dpt:commplex-main
+
+Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+    0     0 REJECT     all  --  any    any     anywhere             anywhere
+reject-with icmp-host-prohibited
+
+Chain OUTPUT (policy ACCEPT 380 packets, 52518 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+[steve@stapp02 ~]$
+[steve@stapp02 ~]$
+[steve@stapp02 ~]$
+logout
+Connection to stapp02 closed.
+thor@jumphost ~/kke$
+thor@jumphost ~/kke$
+thor@jumphost ~/kke$ ssh tony@stapp01
+
+Last login: Thu Dec 19 16:51:37 2024 from 172.16.238.3
+[tony@stapp01 ~]$ sudo iptables -D INPUT -j REJECT --reject-with icmp-host-prohibited
+[tony@stapp01 ~]$ sudo service iptables save
+
+iptables: Saving firewall rules to /etc/sysconfig/iptables: [  OK  ]
+[tony@stapp01 ~]$ sudo iptables -L -v
+
+Chain INPUT (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+  969  198K ACCEPT     all  --  any    any     anywhere             anywhere
+state RELATED,ESTABLISHED
+    0     0 ACCEPT     icmp --  any    any     anywhere             anywhere
+   12   812 ACCEPT     all  --  lo     any     anywhere             anywhere
+    3   180 ACCEPT     tcp  --  any    any     anywhere             anywhere
+state NEW tcp dpt:ssh
+    0     0 ACCEPT     tcp  --  any    any     stlb01               anywhere
+tcp dpt:commplex-main
+    0     0 DROP       tcp  --  any    any     anywhere             anywhere
+tcp dpt:commplex-main
+
+Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+    0     0 REJECT     all  --  any    any     anywhere             anywhere
+reject-with icmp-host-prohibited
+
+Chain OUTPUT (policy ACCEPT 717 packets, 89412 bytes)
+ pkts bytes target     prot opt in     out     source               destination
+[tony@stapp01 ~]$
+[tony@stapp01 ~]$
+[tony@stapp01 ~]$
+logout
+Connection to stapp01 closed.
+thor@jumphost ~/kke$ git status
+On branch main
+Your branch is ahead of 'origin/main' by 2 commits.
+  (use "git push" to publish your local commits)
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   install_iptables.bash
+        deleted:    setup_sshauth.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        tmuxsessiondetails.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+thor@jumphost ~/kke$ git commit -m "add update iptables script"
+On branch main
+Your branch is ahead of 'origin/main' by 2 commits.
+  (use "git push" to publish your local commits)
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   install_iptables.bash
+        deleted:    setup_sshauth.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        tmuxsessiondetails.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+thor@jumphost ~/kke$ git add install_iptables.bash
+thor@jumphost ~/kke$ git commit -m "update iptables script"
+[main 3a82bda] update iptables script
+ Committer: codinglearner55 <thor@jumphost.stratos.xfusioncorp.com>
+Your name and email address were configured automatically based
+on your username and hostname. Please check that they are accurate.
+You can suppress this message by setting them explicitly. Run the
+following command and follow the instructions in your editor to edit
+your configuration file:
+
+    git config --global --edit
+
+After doing this, you may fix the identity used for this commit with:
+
+    git commit --amend --reset-author
+
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+thor@jumphost ~/kke$ git status
+On branch main
+Your branch is ahead of 'origin/main' by 3 commits.
+  (use "git push" to publish your local commits)
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        deleted:    setup_sshauth.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        tmuxsessiondetails.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+thor@jumphost ~/kke$
+thor@jumphost ~/kke$
