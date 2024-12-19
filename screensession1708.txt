@@ -1,3 +1,283 @@
+
+ ##########################################################
+ 
+ 
+ 
+ We have one of our websites up and running on our Nautilus infrastructure in Stratos DC. Our security team has raised a concern that right now Apache’s port i.e 8086 is open for all since there is no firewall installed on these hosts. So we have decided to add some security layer for these hosts and after discussions and recommendations we have come up with the following requirements:
+
+
+
+1. Install iptables and all its dependencies on each app host.
+
+
+2. Block incoming port 8086 on all apps for everyone except for LBR host.
+
+
+3. Make sure the rules remain, even after system reboot.
+
+
+
+
+
+###############################################################   before tmux was started 
+
+thor@jumphost ~/kke$ ls -ltr 
+total 48
+-rw-r--r-- 1 thor thor   143 Dec 19 16:21 setup_tmux.bash
+-rw-r--r-- 1 thor thor   159 Dec 19 16:21 setup_sshauth.txt
+-rw-r--r-- 1 thor thor   100 Dec 19 16:21 README.md
+-rw-r--r-- 1 thor thor 35149 Dec 19 16:21 LICENSE
+thor@jumphost ~/kke$ bash setup_tmux.bash 
+CentOS Stream 9 - BaseOS                                 1.7 MB/s | 8.4 MB     00:05    
+CentOS Stream 9 - AppStream                              385 kB/s |  21 MB     00:56    
+CentOS Stream 9 - Extras packages                         29 kB/s |  19 kB     00:00    
+Extra Packages for Enterprise Linux 9 - x86_64           2.2 MB/s |  23 MB     00:10    
+Extra Packages for Enterprise Linux 9 openh264 (From Cis 5.5 kB/s | 2.5 kB     00:00    
+Extra Packages for Enterprise Linux 9 - Next - x86_64    466 kB/s | 229 kB     00:00    
+Available Packages
+tmux.x86_64                               3.2a-5.el9                               baseos
+
+We trust you have received the usual lecture from the local System
+Administrator. It usually boils down to these three things:
+
+    #1) Respect the privacy of others.
+    #2) Think before you type.
+    #3) With great power comes great responsibility.
+
+[sudo] password for thor: 
+CentOS Stream 9 - BaseOS                                  52 kB/s | 6.3 kB     00:00    
+CentOS Stream 9 - BaseOS                                 7.3 MB/s | 8.4 MB     00:01    
+CentOS Stream 9 - AppStream                               17 kB/s | 6.4 kB     00:00    
+CentOS Stream 9 - AppStream                               21 MB/s |  21 MB     00:01    
+CentOS Stream 9 - Extras packages                         42 kB/s | 6.9 kB     00:00    
+CentOS Stream 9 - Extras packages                         35 kB/s |  19 kB     00:00    
+Extra Packages for Enterprise Linux 9 - x86_64           174 kB/s |  34 kB     00:00    
+Extra Packages for Enterprise Linux 9 - x86_64            28 MB/s |  23 MB     00:00    
+Extra Packages for Enterprise Linux 9 openh264 (From Cis 4.9 kB/s | 993  B     00:00    
+Extra Packages for Enterprise Linux 9 - Next - x86_64    115 kB/s |  25 kB     00:00    
+Extra Packages for Enterprise Linux 9 - Next - x86_64    459 kB/s | 229 kB     00:00    
+Dependencies resolved.
+=========================================================================================
+ Package           Architecture        Version                 Repository           Size
+=========================================================================================
+Installing:
+ tmux              x86_64              3.2a-5.el9              baseos              474 k
+
+Transaction Summary
+=========================================================================================
+Install  1 Package
+
+Total download size: 474 k
+Installed size: 1.1 M
+Downloading Packages:
+tmux-3.2a-5.el9.x86_64.rpm                               1.2 MB/s | 474 kB     00:00    
+-----------------------------------------------------------------------------------------
+Total                                                    829 kB/s | 474 kB     00:00     
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                                 1/1 
+  Installing       : tmux-3.2a-5.el9.x86_64                                          1/1 
+  Running scriptlet: tmux-3.2a-5.el9.x86_64                                          1/1 
+  Verifying        : tmux-3.2a-5.el9.x86_64                                          1/1 
+
+Installed:
+  tmux-3.2a-5.el9.x86_64                                                                 
+
+Complete!
+thor@jumphost ~/kke$ ssh-keygen 
+Generating public/private rsa key pair.
+Enter file in which to save the key (/home/thor/.ssh/id_rsa): 
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in /home/thor/.ssh/id_rsa
+Your public key has been saved in /home/thor/.ssh/id_rsa.pub
+The key fingerprint is:
+SHA256:zdj99HtZpTn8Ki/bVh5SkVay0dF0UJuhayAI/LKK8T8 thor@jumphost.stratos.xfusioncorp.com
+The key's randomart image is:
++---[RSA 3072]----+
+|    ..        +BX|
+|     .. .     .BB|
+|      .. . . .oo.|
+|     . . =... ...|
+|      o S + .+oo.|
+| .   .      .+=oo|
+|  + .         o==|
+| . o E      o...=|
+|    ...     .*+o.|
++----[SHA256]-----+
+thor@jumphost ~/kke$ ls -ltr 
+total 52
+-rw-r--r-- 1 thor thor   143 Dec 19 16:21 setup_tmux.bash
+-rw-r--r-- 1 thor thor   159 Dec 19 16:21 setup_sshauth.txt
+-rw-r--r-- 1 thor thor   100 Dec 19 16:21 README.md
+-rw-r--r-- 1 thor thor 35149 Dec 19 16:21 LICENSE
+-rw-r--r-- 1 thor thor    48 Dec 19 16:24 tmuxsessiondetails.txt
+thor@jumphost ~/kke$ more setup_sshauth.txt 
+userarr=(tony steve banner)
+hostarr=(stapp01 stapp02 stapp03)
+passarr=()
+
+for i in ${!userarr[*]}
+  do 
+    echo "starting ${userarr[i]}@${hostarr[i]}"
+  done
+thor@jumphost ~/kke$ vi setup_sshauth.txt 
+thor@jumphost ~/kke$ passarr=(Ir0nM@n Am3ric@ BigGr33n)
+thor@jumphost ~/kke$ vi setup_sshauth.txt 
+thor@jumphost ~/kke$ vi setup_sshauth.txt 
+thor@jumphost ~/kke$ more  setup_sshauth.txt 
+userarr=(tony steve banner)
+hostarr=(stapp01 stapp02 stapp03)
+#passarr=()
+
+for i in ${!userarr[*]}   ### expanding to the index/subscript of the array element eg. 0 1 2
+  do 
+    echo "starting ${userarr[i]}@${hostarr[i]}"
+    echo ${passarr[i]} | ssh-copy-id ${userarr[i]}@${hostarr[i]}
+  done
+thor@jumphost ~/kke$ git config user.name "codinglearner55"
+thor@jumphost ~/kke$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   setup_sshauth.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        tmuxsessiondetails.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+thor@jumphost ~/kke$ more  setup_sshauth.txt 
+userarr=(tony steve banner)
+hostarr=(stapp01 stapp02 stapp03)
+#passarr=()
+
+for i in ${!userarr[*]}
+  do 
+    echo "starting ${userarr[i]}@${hostarr[i]}"
+    echo ${passarr[i]} | ssh-copy-id ${userarr[i]}@${hostarr[i]}
+  done
+thor@jumphost ~/kke$ mv   setup_sshauth.txt  setup_sshauth.bash
+thor@jumphost ~/kke$ ls -ltr 
+total 52
+-rw-r--r-- 1 thor thor   143 Dec 19 16:21 setup_tmux.bash
+-rw-r--r-- 1 thor thor   100 Dec 19 16:21 README.md
+-rw-r--r-- 1 thor thor 35149 Dec 19 16:21 LICENSE
+-rw-r--r-- 1 thor thor    48 Dec 19 16:24 tmuxsessiondetails.txt
+-rw-r--r-- 1 thor thor   225 Dec 19 16:28 setup_sshauth.bash
+thor@jumphost ~/kke$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        deleted:    setup_sshauth.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        setup_sshauth.bash
+        tmuxsessiondetails.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+thor@jumphost ~/kke$ ls -ltr 
+total 52
+-rw-r--r-- 1 thor thor   143 Dec 19 16:21 setup_tmux.bash
+-rw-r--r-- 1 thor thor   100 Dec 19 16:21 README.md
+-rw-r--r-- 1 thor thor 35149 Dec 19 16:21 LICENSE
+-rw-r--r-- 1 thor thor    48 Dec 19 16:24 tmuxsessiondetails.txt
+-rw-r--r-- 1 thor thor   225 Dec 19 16:28 setup_sshauth.bash
+thor@jumphost ~/kke$ bash setup_sshauth.bash 
+starting tony@stapp01
+/usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "/home/thor/.ssh/id_rsa.pub"
+The authenticity of host 'stapp01 (172.16.238.10)' can't be established.
+ED25519 key fingerprint is SHA256:kRUlonXGp4k3TyVLdxPxB+2Uj2f7MDdZIt9tV9zh6nA.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+/usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
+/usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
+tony@stapp01's password: 
+
+Number of key(s) added: 1
+
+Now try logging into the machine, with:   "ssh 'tony@stapp01'"
+and check to make sure that only the key(s) you wanted were added.
+
+starting steve@stapp02
+/usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "/home/thor/.ssh/id_rsa.pub"
+The authenticity of host 'stapp02 (172.16.238.11)' can't be established.
+ED25519 key fingerprint is SHA256:VZoj5VFsk5gWkFsjexGeKLQAI01LI4cD7gouomQgGh0.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+/usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
+/usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
+steve@stapp02's password: 
+
+Number of key(s) added: 1
+
+Now try logging into the machine, with:   "ssh 'steve@stapp02'"
+and check to make sure that only the key(s) you wanted were added.
+
+starting banner@stapp03
+/usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "/home/thor/.ssh/id_rsa.pub"
+The authenticity of host 'stapp03 (172.16.238.12)' can't be established.
+ED25519 key fingerprint is SHA256:oFLSyA7diJ1uDzz+zIo1MiAIu7naQbMQXF4KDXrP8gk.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+/usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
+/usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
+banner@stapp03's password: 
+
+Number of key(s) added: 1
+
+Now try logging into the machine, with:   "ssh 'banner@stapp03'"
+and check to make sure that only the key(s) you wanted were added.
+
+thor@jumphost ~/kke$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        deleted:    setup_sshauth.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        setup_sshauth.bash
+        tmuxsessiondetails.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+thor@jumphost ~/kke$ git add setup_sshauth.bash 
+thor@jumphost ~/kke$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        new file:   setup_sshauth.bash
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        deleted:    setup_sshauth.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        tmuxsessiondetails.txt
+
+thor@jumphost ~/kke$ tmux attach
+[detached (from session 0)]
+
+#####################################  tmux screen log starts here
+
+
 thor@jumphost ~/kke$ git status
 On branch main
 Your branch is up to date with 'origin/main'.
