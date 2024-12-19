@@ -135,7 +135,7 @@ hostarr=(stapp01 stapp02 stapp03)
 
 for i in ${!userarr[*]}   ### expanding to the index/subscript of the array element eg. 0 1 2
   do 
-    echo "starting ${userarr[i]}@${hostarr[i]}"
+    echo "starting ${userarr[i]}@${hostarr[i]}"      #### excalmation mark ...explained in parameter expansion section  https://linux.die.net/man/1/bash
     echo ${passarr[i]} | ssh-copy-id ${userarr[i]}@${hostarr[i]}
   done
 thor@jumphost ~/kke$ git config user.name "codinglearner55"
@@ -275,6 +275,7 @@ Untracked files:
 thor@jumphost ~/kke$ tmux attach
 [detached (from session 0)]
 
+#####################################  had indtalled tmux but forgot to attach to the screen...above is copy paste
 #####################################  tmux screen log starts here
 
 
@@ -691,6 +692,11 @@ Last login: Thu Dec 19 16:34:32 2024 from 172.16.238.3
 [tony@stapp01 ~]$ sudo systemctl status iptables
 
 Unit iptables.service could not be found.
+
+
+### to have systemctl configured for iptables another package is required called iptables-services
+### this also includes scripts to save iptables config for reboots 
+
 [tony@stapp01 ~]$
 [tony@stapp01 ~]$
 [tony@stapp01 ~]$
@@ -923,6 +929,9 @@ llecting.
 [tony@stapp01 ~]$
 logout
 Connection to stapp01 closed.
+
+### decided to just add commands to enable and start iptables service
+
 thor@jumphost ~/kke$ vi install_iptables.bash
 
 thor@jumphost ~/kke$ more  install_iptables.bash
@@ -1028,6 +1037,11 @@ iled to send unit change signal for iptables.service: Connection reset >
 [tony@stapp01 ~]$
 [tony@stapp01 ~]$ q:q
 -bash: q:q: command not found
+
+### NOTE: I start adding rules here.....PORT IS WRONG!! I realize this later on
+### also note that the rules listed in iptables looks very different to lab we abandoned previously
+### this must be because we had not started the iptables service and would not have beeen able to anyway since iptables-services package was not installed
+
 [tony@stapp01 ~]$ #sudo iptables -A INPUT -p tcp --dport 5000  -j DROP
 [tony@stapp01 ~]$ sudo iptables -A INPUT -p tcp --dport 5000  -j DROP
 
@@ -1380,6 +1394,9 @@ Chain OUTPUT (policy ACCEPT 116 packets, 16477 bytes)
 -A INPUT -s 172.16.238.14/32 -p tcp -m tcp --dport 5000 -j ACCEPT
 -A INPUT -p tcp -m tcp --dport 5000 -j DROP
 -A FORWARD -j REJECT --reject-with icmp-host-prohibited
+
+### I notice here that the reject rule in the INPUT chain is likely to cause issues so it has to be removed
+
 [banner@stapp03 ~]$ sudo iptables -D INPUT -j REJECT --reject-with icmp-host-pro
 hibited
 [banner@stapp03 ~]$
@@ -1575,6 +1592,9 @@ Untracked files:
 
 no changes added to commit (use "git add" and/or "git commit -a")
 thor@jumphost ~/kke$
+
+
+### was ready to check and complete lab but realized mistake with wrong port number
 
 thor@jumphost ~/kke$ ssh tony@stapp01
 Last login: Thu Dec 19 16:55:46 2024 from 172.16.238.3
