@@ -483,7 +483,4 @@ thor@jumphost ~/kke$ tmux capture-pane -p -S-2000 -t 0 > screensession14
 
 #####################################################
 
-### passed the check .... not really understanding the lab......
-### community blog showed htpasswd used to create an htpasswd file
-### also a basic .htaccess file was created under /etc/httpd
-### curl -u  was used to connect to the webserver and possibly should have prompted for a password
+
