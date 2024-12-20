@@ -1,0 +1,252 @@
+xFusionCorp Industries has hosted several static websites on Nautilus Application Servers in Stratos DC. There are some confidential directories in the document root that need to be password protected. Since they are using Apache for hosting the websites, the production support team has decided to use .htaccess with basic auth. There is a website that needs to be uploaded to /var/www/html/data on Nautilus App Server 3. However, we need to set up the authentication before that.
+
+
+
+1. Create /var/www/html/data direcotry if doesn't exist.
+
+
+2. Add a user mark in htpasswd and set its password to LQfKeWWxWD.
+
+
+3. There is a file /tmp/index.html present on Jump Server. Copy the same to the directory you created, please make sure default document root should remain /var/www/html. Also website should work on URL http://<app-server-hostname>:8080/data/
+
+
+
+
+########################################################
+
+ost ~$ ssh banner@stapp03
+banner@stapp03's password:
+Last login: Fri Dec 20 14:59:25 2024 from 172.16.238.2
+[banner@stapp03 ~]$ ls -ltr
+total 4
+-rw-r--r-- 1 banner banner 52 Dec 20 15:12 index.html
+[banner@stapp03 ~]$ #cp index.html /var/www/html/
+
+[banner@stapp03 ~]$ ls -l /var/www/html/
+
+total 4
+drwxr-xr-x 2 root root 4096 Dec 20 15:01 data
+[banner@stapp03 ~]$ sudo cp index.html /var/www/html/data/
+
+[banner@stapp03 ~]$ ls -l /var/www/html/
+total 4
+drwxr-xr-x 2 root root 4096 Dec 20 15:13 data
+[banner@stapp03 ~]$ ls -l /var/www/html/data/
+total 4
+-rw-r--r-- 1 root root 52 Dec 20 15:13 index.html
+[banner@stapp03 ~]$ curl localhost | tail
+  % Total    % Received % Xferd  Average Speed   Time    Time     Tim
+e  Current
+                                 Dload  Upload   Total   Spent    Lef
+t  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--
+:--  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --
+:--:--     0
+curl: (7) Failed to connect to localhost port 80: Connection refused
+[banner@stapp03 ~]$ curl localhost:8080 | tail
+
+  % Total    % Received % Xferd  Average Speed   Time    Time     Tim
+e  Current
+                                 Dload  Upload   Total   Spent    Lef
+t  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--
+:--100 2650k  100 2650k    0     0   215M      0 --:--:-- --:--:-- --
+:--:--  235M
+      </div>
+      <div class="row">
+        <section class="copyright">
+          <p>Copyright © 2021 The CentOS Project | <a href="/legal">L
+egal</a> | <a href="/legal/privacy">Privacy</a> | <a href="https://gi
+t.centos.org/centos/centos.org">Site source</a></p>
+        </section>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
+[banner@stapp03 ~]$ curl localhost:8080/data/ | tail
+
+  % Total    % Received % Xferd  Average Speed   Time    Time     Tim
+e  Current
+                                 Dload  Upload   Total   Spent    Lef
+t  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--
+:--100    52  100    52    0     0  52000      0 --:--:-- --:--:-- --
+:--:-- 52000
+This is xFusionCorp Industries Protected Directory!
+[banner@stapp03 ~]
+[banner@stapp03 ~]
+[banner@stapp03 ~]$
+[banner@stapp03 ~]$
+[banner@stapp03 ~]$
+logout
+Connection to stapp03 closed.
+thor@jumphost ~$ curl stapp03:8080/data/
+This is xFusionCorp Industries Protected Directory!
+thor@jumphost ~$ ssh banner@stapp03
+banner@stapp03's password:
+Last login: Fri Dec 20 15:12:35 2024 from 172.16.238.2
+[banner@stapp03 ~]$ pwd
+/home/banner
+[banner@stapp03 ~]$ find /etc/httpd -name "*.htpasswd*"
+[banner@stapp03 ~]$ id mark
+id: ‘mark’: no such user
+[banner@stapp03 ~]$ more /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+daemon:x:2:2:daemon:/sbin:/sbin/nologin
+adm:x:3:4:adm:/var/adm:/sbin/nologin
+lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+sync:x:5:0:sync:/sbin:/bin/sync
+shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
+halt:x:7:0:halt:/sbin:/sbin/halt
+mail:x:8:12:mail:/var/spool/mail:/sbin/nologin
+operator:x:11:0:operator:/root:/sbin/nologin
+games:x:12:100:games:/usr/games:/sbin/nologin
+ftp:x:14:50:FTP User:/var/ftp:/sbin/nologin
+nobody:x:65534:65534:Kernel Overflow User:/:/sbin/nologin
+tss:x:59:59:Account used for TPM access:/:/usr/sbin/nologin
+systemd-coredump:x:999:997:systemd Core Dumper:/:/sbin/nologin
+dbus:x:81:81:System message bus:/:/sbin/nologin
+sshd:x:74:74:Privilege-separated SSH:/usr/share/empty.sshd:/usr
+/sbin/nologin
+ansible:x:1000:1000::/home/ansible:/bin/bash
+banner:x:1001:1001::/home/banner:/bin/bash
+apache:x:48:48:Apache:/usr/share/httpd:/sbin/nologin
+mark:$apr1$duL2yFYq$4XSRL1g8NYlabN4rqYdbM.
+[banner@stapp03 ~]$ sudo passwd mark
+passwd: Unknown user name 'mark'.
+[banner@stapp03 ~]$ sudo useradd mark
+useradd: group mark exists - if you want to add this user to that gro
+up, use -g.
+[banner@stapp03 ~]$ sudo vi /etc/passwd
+[banner@stapp03 ~]$ sudo passwd mark
+
+Changing password for user mark.
+New password:
+BAD PASSWORD: The password contains the user name in some form
+Retype new password:
+Sorry, passwords do not match.
+New password:
+BAD PASSWORD: The password contains the user name in some form
+Retype new password:
+passwd: all authentication tokens updated successfully.
+[banner@stapp03 ~]$ id mark
+uid=1002(mark) gid=1002(mark) groups=1002(mark)
+[banner@stapp03 ~]$ #sudo htpasswd /etc/passwd mark
+
+[banner@stapp03 ~]
+[banner@stapp03 ~]
+[banner@stapp03 ~]$ htpasswd --help
+Usage:
+        htpasswd [-cimBdpsDv] [-C cost] passwordfile username
+        htpasswd -b[cmBdpsDv] [-C cost] passwordfile username passwor
+d
+
+        htpasswd -n[imBdps] [-C cost] username
+        htpasswd -nb[mBdps] [-C cost] username password
+ -c  Create a new file.
+ -n  Don't update file; display results on stdout.
+ -b  Use the password from the command line rather than prompting for
+ it.
+ -i  Read password from stdin without verification (for script usage)
+.
+ -m  Force MD5 encryption of the password (default).
+ -2  Force SHA-256 crypt() hash of the password (very secure).
+ -5  Force SHA-512 crypt() hash of the password (very secure).
+ -B  Force bcrypt encryption of the password (very secure).
+ -C  Set the computing time used for the bcrypt algorithm
+     (higher is more secure but slower, default: 5, valid: 4 to 17).
+ -r  Set the number of rounds used for the SHA-256, SHA-512 algorithm
+s
+     (higher is more secure but slower, default: 5000).
+ -d  Force CRYPT encryption of the password (8 chars max, insecure).
+ -s  Force SHA-1 encryption of the password (insecure).
+ -p  Do not encrypt the password (plaintext, insecure).
+ -D  Delete the specified user.
+ -v  Verify password for the specified user.
+On other systems than Windows and NetWare the '-p' flag will probably
+ not work.
+The SHA-1 algorithm does not use a salt and is less secure than the M
+D5 algorithm.
+[banner@stapp03 ~]$ find /etc/httpd -name "*.htaccess*"
+[banner@stapp03 ~]$ find /etc -name "*.htaccess*"
+find: ‘/etc/ssh/sshd_config.d’: Permission denied
+find: ‘/etc/sudoers.d’: Permission denied
+[banner@stapp03 ~]$ sudo find /etc -name "*.htaccess*"
+[banner@stapp03 ~]$ cd /etc/httpd/
+[banner@stapp03 httpd]$ ls
+conf  conf.d  conf.modules.d  logs  modules  run  state
+[banner@stapp03 httpd]$ ls -la
+total 32
+drwxr-xr-x 1 root root 4096 Jul 27 12:45 .
+drwxr-xr-x 1 root root 4096 Dec 20 15:29 ..
+drwxr-xr-x 1 root root 4096 Dec 20 14:53 conf
+drwxr-xr-x 1 root root 4096 Jul 27 12:45 conf.d
+drwxr-xr-x 1 root root 4096 Jul 27 12:45 conf.modules.d
+lrwxrwxrwx 1 root root   19 Feb 14  2024 logs -> ../../var/log/httpd
+lrwxrwxrwx 1 root root   29 Feb 14  2024 modules -> ../../usr/lib64/h
+ttpd/modules
+lrwxrwxrwx 1 root root   10 Feb 14  2024 run -> /run/httpd
+lrwxrwxrwx 1 root root   19 Feb 14  2024 state -> ../../var/lib/httpd
+[banner@stapp03 httpd]$ sudo find /var/www -name "*.htaccess*"
+[banner@stapp03 httpd]$ ls -la/var
+ls: invalid option -- '/'
+Try 'ls --help' for more information.
+[banner@stapp03 httpd]$ ls -la /var
+total 84
+drwxr-xr-x 1 root root 4096 Dec 20 14:53 .
+drwxr-xr-x 1 root root 4096 Dec 20 14:53 ..
+-rw-r--r-- 1 root root  208 Jul 15 04:12 .updated
+drwxr-xr-x 1 root root 4096 Jun 25 14:23 adm
+drwxr-xr-x 1 root root 4096 Jul 27 12:45 cache
+drwxr-xr-x 1 root root 4096 Jul 16 10:15 db
+drwxr-xr-x 1 root root 4096 Jun 25 14:23 empty
+drwxr-xr-x 1 root root 4096 Jun 25 14:23 ftp
+drwxr-xr-x 1 root root 4096 Jun 25 14:23 games
+drwxr-xr-x 1 root root 4096 Jul 15 04:12 kerberos
+drwxr-xr-x 1 root root 4096 Dec 20 14:53 lib
+drwxr-xr-x 1 root root 4096 Jun 25 14:23 local
+lrwxrwxrwx 1 root root   11 Jul 15 04:12 lock -> ../run/lock
+drwxr-xr-x 1 root root 4096 Jul 27 12:45 log
+lrwxrwxrwx 1 root root   10 Jun 25 14:23 mail -> spool/mail
+drwxr-xr-x 1 root root 4096 Jun 25 14:23 nis
+drwxr-xr-x 1 root root 4096 Jun 25 14:23 opt
+drwxr-xr-x 1 root root 4096 Jun 25 14:23 preserve
+lrwxrwxrwx 1 root root    6 Jul 15 04:12 run -> ../run
+drwxr-xr-x 1 root root 4096 Jul 27 12:45 spool
+drwxrwxrwt 1 root root 4096 Dec 20 15:23 tmp
+drwxr-xr-x 1 root root 4096 Jul 27 12:45 www
+drwxr-xr-x 1 root root 4096 Jun 25 14:23 yp
+[banner@stapp03 httpd]$ ls -la /var/www
+total 16
+drwxr-xr-x 1 root root 4096 Jul 27 12:45 .
+drwxr-xr-x 1 root root 4096 Dec 20 14:53 ..
+drwxr-xr-x 1 root root 4096 Feb 14  2024 cgi-bin
+drwxr-xr-x 1 root root 4096 Dec 20 15:01 html
+[banner@stapp03 httpd]$ ls -la /var/www/html/
+total 12
+drwxr-xr-x 1 root root 4096 Dec 20 15:01 .
+drwxr-xr-x 1 root root 4096 Jul 27 12:45 ..
+drwxr-xr-x 2 root root 4096 Dec 20 15:13 data
+[banner@stapp03 httpd]$ #ls -la /var/www/html/
+[banner@stapp03 httpd]$ #sudo htpasswd /var/www/html/.htaccess mark
+[banner@stapp03 httpd]$ sudo htpasswd /var/www/html/.htaccess mark
+
+htpasswd: cannot modify file /var/www/html/.htaccess; use '-c' to cre
+ate it
+[banner@stapp03 httpd]$ sudo htpasswd -c /var/www/html/.htaccess mark
+New password:
+Re-type new password:
+Adding password for user mark
+[banner@stapp03 httpd]$ sudo /var/www/html/.htaccess
+sudo: /var/www/html/.htaccess: command not found
+[banner@stapp03 httpd]$ sudo cat /var/www/html/.htaccess
+mark:$apr1$652fAutI$BCp5NtUVnvQmciXv.mpof/
+[banner@stapp03 httpd]$
+logout
+Connection to stapp03 closed.
+thor@jumphost ~$ curl stapp03:8080/data/
+This is xFusionCorp Industries Protected Directory!
+thor@jumphost ~$
