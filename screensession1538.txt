@@ -250,3 +250,13 @@ Connection to stapp03 closed.
 thor@jumphost ~$ curl stapp03:8080/data/
 This is xFusionCorp Industries Protected Directory!
 thor@jumphost ~$
+
+
+
+####################################################################
+
+
+### passed the check .... not really understanding the lab......
+### community blog showed htpasswd used to create an htpasswd file
+### also a basic .htaccess file was created under /etc/httpd
+### curl -u  was used to connect to the webserver and possibly should have prompted for a password
