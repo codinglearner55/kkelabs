@@ -1,3 +1,26 @@
+Nautilus system admin's team is planning to deploy a front end application for their backup utility on Nautilus Backup Server, so that they can manage the backups of different websites from a graphical user interface. They have shared requirements to set up the same; please accomplish the tasks as per detail given below:
+
+
+
+a. Install Apache Server on Nautilus Backup Server and configure it to use 8089 port (do not bind it to 127.0.0.1 only, keep it default i.e let Apache listen on server's IP, hostname, localhost, 127.0.0.1 etc).
+
+
+b. Install Nginx webserver on Nautilus Backup Server and configure it to use 8096.
+
+
+c. Configure Nginx as a reverse proxy server for Apache.
+
+
+d. There is a sample index file /home/thor/index.html on Jump Host, copy that file to Apache's document root.
+
+
+e. Make sure to start Apache and Nginx services.
+
+
+f. You can test final changes using curl command, e.g curl http://<backup server IP or Hostname>:8096.
+
+##################################################
+
 thor@jumphost ~/kke$ ssh clint@stbkp01
 The authenticity of host 'stbkp01 (172.16.238.16)' can't be established.
 ED25519 key fingerprint is SHA256:4NwMbMpGwamkDZQUmPCY+eHOJuRW6j1p9xgJ2N
@@ -458,3 +481,9 @@ thor@jumphost ~$ cd kke
 thor@jumphost ~/kke$ tmux capture-pane -p -S-2000 -t 0 > screensession14
 45.txt
 
+#####################################################
+
+### passed the check .... not really understanding the lab......
+### community blog showed htpasswd used to create an htpasswd file
+### also a basic .htaccess file was created under /etc/httpd
+### curl -u  was used to connect to the webserver and possibly should have prompted for a password
