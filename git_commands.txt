@@ -1,0 +1,70 @@
+## USEFUL GIT COMMANDS
+git init
+git status 
+
+Git add <file>  (git can then see any changes called staging…ready to be committed)
+Git status
+
+Git commit -m "<some message>"
+Git commit    ### without -m will open configured editor for the message
+Git status
+Git rm --cached <file name>  ###  remove file from the index (from staging and from tracking)
+Git rm -f <file name>               ###  remove file from index and working area (from staging,tracking and working area) - to remove only from working area use /bin/rm
+
+##### Clean commit history is good practice
+##### meaning each commit for a clear, concise purpose that is atomic…can be singled out easily by having its own commit entry
+
+Git log   (master  - main timeline of the project)
+
+
+System/global/local
+
+
+Git config --list     # view 
+Git config <setting>   # view
+
+Git config --global <setting> <setting value>   # apply global setting
+Git config --global <setting>    # view global setting
+
+
+git config --global color.ui auto
+git config --global core.editor nano
+git config --global core.autocrlf input   ## CRLF on win LF on *nix…this handles CRLF not LF  (auto converts CRFL to LF but does not change LF)
+git config --global alias.st status  ## sets up alias st for status
+
+git config user.name   ### repo specific (local)
+git config --global user.name   #### global
+
+
+git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+
+git diff  ## shows what has been removed and what has been added but not yet staged
+git diff --staged ## shows what has been removed and what has been added but not yet committed
+
+Git status   ### to see changes have been made…uncommitted changes
+Git diff    --staged   ### to see what the changes are in staging area ready for commiting
+Git restore --staged <filename>
+.gitignore
+
+Check to see if git diff --staged command was given or just git diff
+
+### BRANCHING & MERGING
+
+Git branch <branch name>      ## create new branch
+Git branch                                   ## list branches and show current branch 
+Git checkout <branch name> ## switch current working directory to <branch name>
+git switch <branch name>  ## same as git checkout, newer command acheives same result as git checkout
+
+## commands below can create a branch and swtich to it in one command both achieve the same
+git checkout -b <branch name> ## create a new branch called <branch name> and switch to it
+git switch -c <branch name> ## create a new branch called <branch name> and switch to it
+
+
+Git diff master   ## show differences between current branch and master branch
+Git diff <branch name>   ## show differences between current branch and the branch called <branch name>
+Git merge <branch name>  ## switch to master to pull in changes from new branch
+Git branch --merged   ## list the branches that have been merged in to the current branch
+Git branch -d <branch name> ## delete branch --only if fully merged
+Git branch -D <branch name> ## force delete branch -- even if not fully merged 
+Git branch -a   ## view all branches including remote branches
+
