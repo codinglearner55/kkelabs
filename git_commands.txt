@@ -46,8 +46,6 @@ Git diff    --staged   ### to see what the changes are in staging area ready for
 Git restore --staged <filename>
 .gitignore
 
-Check to see if git diff --staged command was given or just git diff
-
 ### BRANCHING & MERGING
 
 Git branch <branch name>      ## create new branch
