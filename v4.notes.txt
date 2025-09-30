@@ -1,0 +1,18 @@
+10:36 07/08/2025
+added options for amis - redhat and ubuntu
+default ami user
+- redhat : ec2-user
+- ubuntu : ubuntu
+
+## installed yq using pip install yq
+## ubuntu
+sudo apt update
+apt install python3-pip
+apt install jq
+pip install yq (add yq to PATH if needed)
+
+##redhat
+sudo yum install jq (may have been installed already)
+sudo install python3-pip
+pip install yq
+

@@ -1,0 +1,94 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "CloudFormation template to create an EC2 instance with VPC and Security Group parameters",
+    
+    "Parameters": {
+        "VpcId": {
+            "Type": "AWS::EC2::VPC::Id",
+            "Description": "Select a VPC"
+        },
+        "SecurityGroupId": {
+            "Type": "AWS::EC2::SecurityGroup::Id",
+            "Description": "Select a Security Group"
+        },
+        "SubnetId": {
+            "Type": "AWS::EC2::Subnet::Id",
+            "Description": "Select a Subnet within the selected VPC"
+        },
+        "ImageId": {
+            "Type": "AWS::EC2::Image::Id",
+            "Description": "Enter the AMI ID for the instance",
+            "Default": "ami-0f321d890424a6390",
+            "AllowedValues": [
+                "ami-0d67d2fca664feb68",
+                "ami-0f321d890424a6390"
+            ]
+        },
+        "InstanceType": {
+            "Description": "EC2 instance type",
+            "Type": "String",
+            "Default": "t2.micro",
+            "AllowedValues": [
+                "t2.micro",
+                "t2.small",
+                "t2.medium"
+            ]
+        },
+        "KeyName": {
+            "Description": "Name of an existing EC2 KeyPair to enable SSH access",
+            "Type": "AWS::EC2::KeyPair::KeyName"
+        }
+    },
+
+    "Resources": {
+        "EC2Instance": {
+            "Type": "AWS::EC2::Instance",
+            "Properties": {
+                "InstanceType": {
+                    "Ref": "InstanceType"
+                },
+                "SecurityGroupIds": [
+                    {
+                        "Ref": "SecurityGroupId"
+                    }
+                ],
+                "SubnetId": {
+                    "Ref": "SubnetId"
+                },
+                "KeyName": {
+                    "Ref": "KeyName"
+                },
+                "ImageId": {
+                    "Ref": "ImageId"
+                }
+            }
+        }
+    },
+
+    "Outputs": {
+        "InstanceId": {
+            "Description": "Instance ID of the created EC2 instance",
+            "Value": {
+                "Ref": "EC2Instance"
+            }
+        },
+        "PrivateDNS": {
+            "Description": "Private DNS of the created EC2 instance",
+            "Value": {
+                "Fn::GetAtt": [
+                    "EC2Instance",
+                    "PrivateDnsName"
+                ]
+            }
+        },
+        "PrivateIP": {
+            "Description": "Private IP of the created EC2 instance",
+            "Value": {
+                "Fn::GetAtt": [
+                    "EC2Instance",
+                    "PrivateIp"
+                ]
+            }
+        }
+    }
+}
