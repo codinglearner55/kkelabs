@@ -4,3 +4,6 @@ https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-l
 
 EC2 Service team docs
 https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonec2.html
+
+Global Condition Keys
+https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html
