@@ -1,0 +1,3 @@
+Public AWS docs for reading:
+Policy evaluation
+https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html
