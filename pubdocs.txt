@@ -1,3 +1,6 @@
 Public AWS docs for reading:
 Policy evaluation
 https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html
+
+EC2 Service team docs
+https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonec2.html
